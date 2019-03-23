@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html><!-- InstanceBegin template="/Templates/content.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>2017 ACRES</title>
+<!-- InstanceEndEditable -->
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="bookmark" href="favicon.ico"/>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+</head>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+$(function(){
+	var $block = $('#abgne_fade_pic'), 
+		$ad = $block.find('.ad'),
+		showIndex = 0,			// 預設要先顯示那一張
+		fadeOutSpeed = 2000,	// 淡出的速度
+		fadeInSpeed = 2000,		// 淡入的速度
+		defaultZ = 10,			// 預設的 z-index
+		isHover = false,
+		timer, speed = 1000;	// 計時器及輪播切換的速度
+ 
+	// 先把其它圖片的變成透明
+	$ad.css({
+		opacity: 0,
+		zIndex: defaultZ - 1
+	}).eq(showIndex).css({
+		opacity: 1,
+		zIndex: defaultZ
+	});
+ 
+	// 組出右下的按鈕
+	var str = '';
+	for(var i=0;i<$ad.length;i++){
+		str += '<a href="#">' + (i + 1) + '</a>';
+	}
+	var $controlA = $('#abgne_fade_pic').append($('<div class="control">' + str + '</div>').css('zIndex', defaultZ + 1)).find('.control a');
+ 
+	// 當按鈕被點選時
+	// 若要變成滑鼠滑入來切換時, 可以把 click 換成 mouseover
+	$controlA.click(function(){
+		// 取得目前點擊的號碼
+		showIndex = $(this).text() * 1 - 1;
+ 
+		// 顯示相對應的區域並把其它區域變成透明
+		$ad.eq(showIndex).stop().fadeTo(fadeInSpeed, 1, function(){
+			if(!isHover){
+				// 啟動計時器
+				timer = setTimeout(autoClick, speed + fadeInSpeed);
+			}
+		}).css('zIndex', defaultZ).siblings('a').stop().fadeTo(fadeOutSpeed, 0).css('zIndex', defaultZ - 1);
+		// 讓 a 加上 .on
+		$(this).addClass('on').siblings().removeClass('on');
+ 
+		return false;
+	}).focus(function(){
+		$(this).blur();
+	}).eq(showIndex).addClass('on');
+ 
+	$ad.hover(function(){
+		isHover = true;
+		// 停止計時器
+		clearTimeout(timer);
+	}, function(){
+		isHover = false;
+		// 啟動計時器
+		timer = setTimeout(autoClick, speed);
+	})
+ 
+	// 自動點擊下一個
+	function autoClick(){
+		if(isHover) return;
+		showIndex = (showIndex + 1) % $controlA.length;
+		$controlA.eq(showIndex).click();
+	}
+ 
+	// 啟動計時器
+	timer = setTimeout(autoClick, speed);
+});
+
+})
+
+</script>
+
+<link rel="stylesheet" href="ajximagerotator.css" type="text/css" />
+<script src="ajximagerotator.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ajxmenu.css" type="text/css" />
+<script src="ajxmenu.js" type="text/javascript"></script>
+
+<body>
+
+
+
+
+<div class="main">
+<div class="header">
+
+<div class="center">
+<div class="logo">
+
+<img src="images/logo.png" width="308" height="263">
+
+
+</div>
+
+<div id="abgne_fade_pic"> 
+
+		 <a href="#" class="ad"><img src="images/1.jpg" title="" alt="" rel=""/></a>
+		<a href="#" class="ad"><img src="images/2.jpg" title="" alt="" rel=""/></a>
+		<a href="#" class="ad"><img src="images/3.jpg" title="" alt="" rel=""/></a>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+<div class="menu">
+
+<div class="center">
+<div class="AJXCSSMenuWeOfEYB"> <!-- AJXFILE:ajxmenu.css -->
+              <ul>
+                <li class=""><a class="" href="index.html">Home</a>
+                  
+                </li>
+
+               <li class=""><a class="" href="committee.html">Committee</a>
+                  
+                </li>
+             
+                 <li class="tfirst tsub">
+                 <a class="ajxsub" href="#">Program</a>
+                <ul class="sub-menu">
+                <li><a href="program.html" target="_top">Program at a Glance</a></li>
+                <li><a href="program2.html" target="_top">Scientific Program</a></li>
+                <li><a href="program3.html" target="_top">Invited Speakers</a></li>
+                 <li><a href="program4.html" target="_top">Social Program</a></li>
+                </ul>           
+        </li>
+        
+         <li class="tfirst tsub">
+                 <a style="width:160px"  class="ajxsub" href="#">Abstract Submission</a>
+                <ul class="sub-menu">
+                <li><a href="abstract.html" target="_top">Abstract Guideline</a></li>
+                <li><a href="abstract3.html" target="_top">Video Guideline</a></li>
+                
+                <li><a href="http://acres2017.aoetek.com/">On-line Submission</a><a href="abstract2.html" target="_top"></a></li>
+
+                </ul>           
+        </li>
+        
+                 <li class="tfirst tsub">
+                 <a class="ajxsub" href="#">Registration</a>
+                <ul class="sub-menu">
+                <li><a href="registration.html" target="_top">Guideline</a></li>
+                <li><a href="http://acres2017.aoetek.com/">On-line Registration</a><a href="registration2.html" target="_top"></a></li>
+
+                </ul>           
+        </li>
+        
+             <li class="tfirst tsub">
+                 <a class="ajxsub" href="#">Information</a>
+                <ul class="sub-menu">
+                <li><a href="information.html" target="_top" >Conference Venue</a></li>
+                <li><a href="information2.html" target="_top" >Transportation</a></li>
+                <li><a href="information3.html" target="_top" >Accommodation</a></li>
+                <li><a href="information4.html" target="_top" >Optional Tour</a></li>
+                <li><a href="information5.html" target="_top" >About Taiwan</a></li>
+       
+
+
+                </ul>           
+        </li>
+        
+         <li class="tfirst tsub">
+                 <a class="ajxsub" style="width:50px" href="#">Award</a>
+                <ul class="sub-menu">
+                <li><a href="award.html" target="_top" >Travel Award</a></li>
+                <li><a href="award2.html" target="_top" >Video Award</a></li>
+                <li><a href="award3.html" target="_top" >Best Nursing Award</a></li>
+
+                </ul>           
+        </li>
+                
+
+
+
+
+         <li class="tfirst tsub">
+                 <a class="ajxsub" style="width:50px" href="#">VISA</a>
+                <ul class="sub-menu">
+                <li><a href="visa.html" target="_top" >Overseas Participants</a></li>
+                <li><a href="visa2.html" target="_top" >中國大陸與會人士</a></li>
+
+                </ul>           
+        </li>
+        
+        
+        
+        
+                  
+                </li>
+             
+                <li class=""><a class="" style="width:180px" href="sponsors.html" target="_top">Sponsorship & Exhibition</a>
+                </li>
+              
+           
+                
+                
+               
+                
+                
+              
+              </ul>
+          </div>
+</div>
+
+
+</div>
+
+
+
+<div class="center">
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="center">
+
+<div class="welcome"><!-- InstanceBeginEditable name="EditRegion3" -->
+
+
+<div class="content_left">
+
+<h2 class="title">Registration > <span class="title_coffee">Local Participants</span></h2>
+<div class="blue_line"></div>
+
+<div class="title_second">Important Dates</div>
+<ol class="none">
+<li>Deadline for Early Bird Registration: <span class="underline">September 30, 2017</span></li>
+<li>Deadline for Online Registration: <span class="underline">November 10, 2017</span></li>
+<li>On-Site Registration: <span class="underline">November 24-26, 2017</span></li>
+
+</ol>
+
+
+<table class="fee">
+
+<thead>
+<tr>
+<th width="205">
+<strong>Category</strong>
+</th>
+<th width="170">
+<strong>Early Bird</strong><br/>
+<strong>September 30, 2017</strong>
+</th>
+<th width="173" >
+<strong>Regular</strong><br/>
+<strong>November 10, 2017</strong>
+</th>
+<th width="186" >
+<strong>On-Site</strong><br/>
+<strong>November 24-26, 2017</strong>
+</th>
+</tr>
+
+
+</thead>
+<tbody>
+
+<tr>
+<td>
+台灣機器人手術醫學會<br>
+(TRSA)會員 </td>
+<td >
+NTD 1,000
+</td>
+<td >
+NTD 2,000
+</td>
+<td >
+NTD 2,500
+</td>
+</tr>
+<tr>
+  <td>合辦學會會員</td>
+  <td >NTD 3,000 </td>
+  <td >NTD 4,000 </td>
+  <td >NTD 4,500 </td>
+</tr>
+<tr>
+  <td> 非會員</td>
+  <td > NTD 6,000 </td>
+  <td > NTD 9,000 </td>
+  <td > NTD 10,000 </td>
+</tr>
+<tr>
+  <td>住院醫師/護理人員/醫學生</td>
+  <td colspan="3" >Free</td>
+</tr>
+<tr>
+  <td>Gala Dinner</td>
+  <td colspan="3" >NTD 1,500</td>
+  </tr>
+</tbody>
+</table>
+<div class="title_second">Registration fee includes:</div>
+<p>1. Admission to scientific program &amp; Exhibition<br>
+  2. Congress Book /  Congress Bag<br>
+  3. Coffee Break &amp; Lunch<br>
+</p>
+<p><a href="http://www.twrsa.org.tw/member/join.asp" target="_blank"><strong>※加入台灣機器人手術醫學會(TRSA)會員 </strong></a></p>
+<p class="title_second"><a href="http://www.twrsa.org.tw/member/join.asp" target="_blank"><strong>※</strong></a>合辦學會列表</p>
+<ul>
+  <li> 台灣內視鏡外科醫學會</li>
+  <li> 台灣消化系外科醫學會</li>
+  <li> 台灣血管外科醫學會</li>
+  <li> 台灣胸腔及心臟血管外科醫學會</li>
+  <li> 台灣泌尿科醫學會</li>
+  <li> 台灣婦產科醫學會</li>
+  <li> 台灣婦產科內視鏡暨微創醫學會</li>
+  <li> 台灣耳鼻喉科醫學會</li>
+  <li> 中華民國大腸直腸外科醫學會</li>
+  <li> 台灣大腸直腸醫學會</li>
+  <li>台灣手術全期護理學會</li>
+  <li>台灣頭頸部腫瘤醫學會</li>
+</ul>
+</div>
+
+
+<div class="content_right">
+
+
+<iframe src="menu_registration.html" name="photo_menu" width="206" marginwidth="0" height="500" marginheight="0" scrolling="No" frameborder="0" id="in_menu"></iframe>
+
+</div>
+
+
+
+<!-- InstanceEndEditable -->
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+<div class="center">
+
+
+
+
+
+
+
+</div>
+
+
+<div class="clear"></div>
+
+<div class="footer">
+<div class="center">
+
+<table width="100%">
+<tbody>
+<tr>
+<td width="272" valign="top">
+<p>
+<b>Congress Secretariat</b><br/>
+Evelyn Liu<br/>
+Tel: +886-2-2312-3456 #65113<br>
+E-Mail: <a href="mailto:Tel: +886-2-2312-3456 #65113
+E-Mail: acres2017info@gmail.com">acres2017info@gmail.com</a></p>
+</td>
+<td width="449" valign="top"><p>大陆地区 会务承办处 <br>
+  上海商務國際旅行社有限公司<br>
+  袁晨凱<br>
+  TEL: +86-21-51080778  /  Mobile: +86-135-2452-8688<br>
+  Email: <a href="mailto: 498434812@qq.com">498434812@qq.com</a> </p></td>
+<td valign="top" width="200">
+<p>Copyright &copy; 2017 ACRES</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+</body>
+<!-- InstanceEnd --></html>

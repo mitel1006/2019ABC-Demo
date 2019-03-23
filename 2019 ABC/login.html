@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html><!-- InstanceBegin template="/Templates/content.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>2017 ACRES</title>
+<!-- InstanceEndEditable -->
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="bookmark" href="favicon.ico"/>
+<!-- InstanceBeginEditable name="head" -->
+
+<script type="text/javascript">
+
+function chkidno(s) {
+	var c, n, i, byte2,id;
+	var t= "ABCDEFGHJKLMNPQRSTUVXYWZIO";
+	c= s.value.substring(0,1);
+	c= t.indexOf(c.toUpperCase());
+	
+	if(s.value.length != 10) return "證號碼長度不足.\n";
+	if(c<0) return "身份證號碼第一字不是英文.\n";
+	else{
+		byte2 = s.value.substring(1,2);
+		if(byte2 >= '0' && byte2 <= '9'){	
+			n= parseInt(c/10)+ c%10*9+ 1;//B120667503
+			for(i=1; i<9; i++) n= n+ parseInt(s.value.substring(i,i+1))* (9-i);
+			n= (10- (n% 10))% 10;
+			if(n!= parseInt(s.value.substring(9,10))) return "身份證號資料錯誤.\n";	
+		}else if((byte2 >= 'A' && byte2 <= 'Z' ) || (byte2 >= 'a' && byte2 <= 'z' )){
+			byte2 =  t.indexOf(byte2.toUpperCase());
+			n= (((c%10)*9+parseInt(c/10)+1)%10)+(byte2%10)*8;//FA12345689
+			for(i=2; i<9; i++) n += parseInt(s.value.substring(i,i+1))* (9-i);
+			n= 10- (n% 10);
+			if(n!= parseInt(s.value.substring(9,10))) return "居留證號資料錯誤.\n";	
+		}else
+			return "輸入證號資料錯誤.\n";
+	}
+	return "";
+}
+
+</script>
+
+
+
+
+<!-- InstanceEndEditable -->
+</head>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+$(function(){
+	var $block = $('#abgne_fade_pic'), 
+		$ad = $block.find('.ad'),
+		showIndex = 0,			// 預設要先顯示那一張
+		fadeOutSpeed = 2000,	// 淡出的速度
+		fadeInSpeed = 2000,		// 淡入的速度
+		defaultZ = 10,			// 預設的 z-index
+		isHover = false,
+		timer, speed = 1000;	// 計時器及輪播切換的速度
+ 
+	// 先把其它圖片的變成透明
+	$ad.css({
+		opacity: 0,
+		zIndex: defaultZ - 1
+	}).eq(showIndex).css({
+		opacity: 1,
+		zIndex: defaultZ
+	});
+ 
+	// 組出右下的按鈕
+	var str = '';
+	for(var i=0;i<$ad.length;i++){
+		str += '<a href="#">' + (i + 1) + '</a>';
+	}
+	var $controlA = $('#abgne_fade_pic').append($('<div class="control">' + str + '</div>').css('zIndex', defaultZ + 1)).find('.control a');
+ 
+	// 當按鈕被點選時
+	// 若要變成滑鼠滑入來切換時, 可以把 click 換成 mouseover
+	$controlA.click(function(){
+		// 取得目前點擊的號碼
+		showIndex = $(this).text() * 1 - 1;
+ 
+		// 顯示相對應的區域並把其它區域變成透明
+		$ad.eq(showIndex).stop().fadeTo(fadeInSpeed, 1, function(){
+			if(!isHover){
+				// 啟動計時器
+				timer = setTimeout(autoClick, speed + fadeInSpeed);
+			}
+		}).css('zIndex', defaultZ).siblings('a').stop().fadeTo(fadeOutSpeed, 0).css('zIndex', defaultZ - 1);
+		// 讓 a 加上 .on
+		$(this).addClass('on').siblings().removeClass('on');
+ 
+		return false;
+	}).focus(function(){
+		$(this).blur();
+	}).eq(showIndex).addClass('on');
+ 
+	$ad.hover(function(){
+		isHover = true;
+		// 停止計時器
+		clearTimeout(timer);
+	}, function(){
+		isHover = false;
+		// 啟動計時器
+		timer = setTimeout(autoClick, speed);
+	})
+ 
+	// 自動點擊下一個
+	function autoClick(){
+		if(isHover) return;
+		showIndex = (showIndex + 1) % $controlA.length;
+		$controlA.eq(showIndex).click();
+	}
+ 
+	// 啟動計時器
+	timer = setTimeout(autoClick, speed);
+});
+
+})
+
+</script>
+
+<link rel="stylesheet" href="ajximagerotator.css" type="text/css" />
+<script src="ajximagerotator.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ajxmenu.css" type="text/css" />
+<script src="ajxmenu.js" type="text/javascript"></script>
+
+<body>
+
+
+
+
+<div class="main">
+<div class="header">
+
+<div class="center">
+<div class="logo">
+
+<img src="images/logo.png" width="308" height="263">
+
+
+</div>
+
+<div id="abgne_fade_pic"> 
+
+		 <a href="#" class="ad"><img src="images/1.jpg" title="" alt="" rel=""/></a>
+		<a href="#" class="ad"><img src="images/2.jpg" title="" alt="" rel=""/></a>
+		<a href="#" class="ad"><img src="images/3.jpg" title="" alt="" rel=""/></a>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+<div class="menu">
+
+<div class="center">
+<div class="AJXCSSMenuWeOfEYB"> <!-- AJXFILE:ajxmenu.css -->
+              <ul>
+                <li class=""><a class="" href="index.html">Home</a>
+                  
+                </li>
+
+               <li class=""><a class="" href="committee.html">Committee</a>
+                  
+                </li>
+             
+                 <li class="tfirst tsub">
+                 <a class="ajxsub" href="#">Program</a>
+                <ul class="sub-menu">
+                <li><a href="program.html" target="_top">Program at a Glance</a></li>
+                <li><a href="program2.html" target="_top">Scientific Program</a></li>
+                <li><a href="program3.html" target="_top">Invited Speakers</a></li>
+                 <li><a href="program4.html" target="_top">Social Program</a></li>
+                </ul>           
+        </li>
+        
+         <li class="tfirst tsub">
+                 <a style="width:160px"  class="ajxsub" href="#">Abstract Submission</a>
+                <ul class="sub-menu">
+                <li><a href="abstract.html" target="_top">Abstract Guideline</a></li>
+                <li><a href="abstract3.html" target="_top">Video Guideline</a></li>
+                
+                <li><a href="http://acres2017.aoetek.com/">On-line Submission</a><a href="abstract2.html" target="_top"></a></li>
+
+                </ul>           
+        </li>
+        
+                 <li class="tfirst tsub">
+                 <a class="ajxsub" href="#">Registration</a>
+                <ul class="sub-menu">
+                <li><a href="registration.html" target="_top">Guideline</a></li>
+                <li><a href="http://acres2017.aoetek.com/">On-line Registration</a><a href="registration2.html" target="_top"></a></li>
+
+                </ul>           
+        </li>
+        
+             <li class="tfirst tsub">
+                 <a class="ajxsub" href="#">Information</a>
+                <ul class="sub-menu">
+                <li><a href="information.html" target="_top" >Conference Venue</a></li>
+                <li><a href="information2.html" target="_top" >Transportation</a></li>
+                <li><a href="information3.html" target="_top" >Accommodation</a></li>
+                <li><a href="information4.html" target="_top" >Optional Tour</a></li>
+                <li><a href="information5.html" target="_top" >About Taiwan</a></li>
+       
+
+
+                </ul>           
+        </li>
+        
+         <li class="tfirst tsub">
+                 <a class="ajxsub" style="width:50px" href="#">Award</a>
+                <ul class="sub-menu">
+                <li><a href="award.html" target="_top" >Travel Award</a></li>
+                <li><a href="award2.html" target="_top" >Video Award</a></li>
+                <li><a href="award3.html" target="_top" >Best Nursing Award</a></li>
+
+                </ul>           
+        </li>
+                
+
+
+
+
+         <li class="tfirst tsub">
+                 <a class="ajxsub" style="width:50px" href="#">VISA</a>
+                <ul class="sub-menu">
+                <li><a href="visa.html" target="_top" >Overseas Participants</a></li>
+                <li><a href="visa2.html" target="_top" >中國大陸與會人士</a></li>
+
+                </ul>           
+        </li>
+        
+        
+        
+        
+                  
+                </li>
+             
+                <li class=""><a class="" style="width:180px" href="sponsors.html" target="_top">Sponsorship & Exhibition</a>
+                </li>
+              
+           
+                
+                
+               
+                
+                
+              
+              </ul>
+          </div>
+</div>
+
+
+</div>
+
+
+
+<div class="center">
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="center">
+
+<div class="welcome"><!-- InstanceBeginEditable name="EditRegion3" -->
+
+
+<div class="content_left">
+
+<h2 class="title">Registration > <span class="title_coffee">Guideline</span></h2>
+<div class="blue_line"></div>
+<table class="table_login" border="0" align="center" cellpadding="2" cellspacing="2">
+           
+           
+           <thead><tr><th></th></tr></thead>
+            
+            <tbody>
+            <tr>
+            <td>
+            <ol class="idlogin">
+            <li>
+            For domestic registration, please  entered your Taiwanese ID number or
+             ARC number below to see the registration  details in next page.
+               </li>
+               <li>   
+          欲查詢國內與會者相關報名資訊請輸入身份證字號或居留證號
+            </li>
+            </ol>
+            </td>
+            </tr>
+            <tr>
+            <td>
+            
+            <form method="post" name="malayform" id="malayform">
+         
+                <table width="100%" border="0" cellpadding="6" cellspacing="0" bordercolor="#FFFFFF" bgcolor="#FFFFFF">
+                    <tbody><tr>
+                      <th valign="bottom" class="important">身份證字號或居留證號 (ID)<br>
+                        <input type="text" name="id_no" size="20">
+                      </th>
+                    </tr>
+                    <tr>
+                      <td height="52">
+                      
+                      <p align="center">
+                          <input name="submit" type="button" value="LOGIN" onclick="if((aa=chkidno(malayform.id_no))!='') alert(aa); else 
+location.replace('local_participants.html');">
+                      </p></td>
+                    </tr>
+                  </tbody></table>
+             
+              </form>
+      
+            </td>
+            </tr>
+            </tbody>
+          </table>
+
+</div>
+
+
+<div class="content_right">
+
+
+<iframe src="menu_registration.html" name="photo_menu" width="206" marginwidth="0" height="500" marginheight="0" scrolling="No" frameborder="0" id="in_menu"></iframe>
+
+</div>
+
+
+
+<!-- InstanceEndEditable -->
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+<div class="center">
+
+
+
+
+
+
+
+</div>
+
+
+<div class="clear"></div>
+
+<div class="footer">
+<div class="center">
+
+<table width="100%">
+<tbody>
+<tr>
+<td width="272" valign="top">
+<p>
+<b>Congress Secretariat</b><br/>
+Evelyn Liu<br/>
+Tel: +886-2-2312-3456 #65113<br>
+E-Mail: <a href="mailto:Tel: +886-2-2312-3456 #65113
+E-Mail: acres2017info@gmail.com">acres2017info@gmail.com</a></p>
+</td>
+<td width="449" valign="top"><p>大陆地区 会务承办处 <br>
+  上海商務國際旅行社有限公司<br>
+  袁晨凱<br>
+  TEL: +86-21-51080778  /  Mobile: +86-135-2452-8688<br>
+  Email: <a href="mailto: 498434812@qq.com">498434812@qq.com</a> </p></td>
+<td valign="top" width="200">
+<p>Copyright &copy; 2017 ACRES</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+</body>
+<!-- InstanceEnd --></html>
