@@ -27,7 +27,7 @@ a:hover
 .header
 { background-color:#232159;
   height:298px;
-  background-image:url(images/banner_bg.jpg);
+  background-image:url(banner_bg.jpg);
   background-position:center top;
   background-repeat:no-repeat;
   min-width:1024px;
